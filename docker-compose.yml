@@ -1,5 +1,8 @@
 version: '2'
 services:
+  ##
+  # Nginx Reverse Proxy
+  ##
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
@@ -11,13 +14,9 @@ services:
       - /home/corncandy/Workspace/ssl:/etc/nginx/certs
     environment:
       - DEFAULT_HOST=www.muyunsong.com
-
-  whoami:
-    image: jwilder/whoami
-    container_name: whoami
-    environment:
-      - VIRTUAL_HOST=sample.muyunsong.com
-
+  ##
+  # Jekyll based blog
+  ##
   jekyll-blog:
     image: jekyll/jekyll
     container_name: jekyll-blog
@@ -28,13 +27,14 @@ services:
     environment:
       - VIRTUAL_HOST=www.muyunsong.com
       - VIRTUAL_PORT=4000
-
+  ##
+  # Jenkins CI
+  ##
   data-jenkins:
     image: busybox
     container_name: data-jenkins
     volumes:
       - /var/jenkins_home
-
   jenkins-ci:
     image: jenkins:alpine
     container_name: jenkins-ci
@@ -42,16 +42,17 @@ services:
       - 8080
       - 50000
     user: root
-    volumes_from:
-      - data-jenkins
     volumes:
       - /etc/timezone:/etc/timezone
       - /home/corncandy/Workspace/corncandy.github.io:/srv/jekyll
       - /home/corncandy/Workspace/gitbooks/wd-frontend:/srv/gitbook
+      - /home/corncandy/Workspace/jenkins_home:/var/jenkins_home
     environment:
       - VIRTUAL_HOST=ci.muyunsong.com
       - VIRTUAL_PORT=8080
-
+  ##
+  # GitBook based WUI framework
+  ##
   gitbook-wui:
     image: fellah/gitbook
     container_name: gitbook-wui
@@ -63,7 +64,9 @@ services:
     environment:
       - VIRTUAL_HOST=wui.muyunsong.com
       - VIRTUAL_PORT=4000
-     
+  ##
+  # Static site of slideshow
+  ##
   nginx-slideshow:
     image: nginx
     container_name: nginx-slideshow
