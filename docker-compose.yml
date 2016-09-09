@@ -76,3 +76,45 @@ services:
       - /home/corncandy/Workspace/slideshows:/usr/share/nginx/html:ro
     environment:
       - VIRTUAL_HOST=slideshow.muyunsong.com
+  ##
+  # Redis
+  ##
+  redis:
+    image: redis
+    container_name: redis
+    ports: 
+      - 6379
+  ##
+  # MongoDB
+  ##
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017
+    volumes:
+      - /home/corncandy/Workspace/mongodb:/data/db
+  mongo-admin:
+    image: mongo-express
+    container_name: mongo-admin
+    links:
+      - mongo:mongo
+    ports:
+      - 8081
+    environment:
+      - VIRTUAL_HOST=db.muyunsong.com
+      - VIRTUAL_PORT=27017
+  ##
+  # Node Test
+  ##
+  node-test:
+    build: node-test
+    container_name: node-test
+    ports:
+      - 3000
+    volumes:
+      - /home/corncandy/Workspace/node-test:/usr/src/app
+    links:
+      - redis:redis
+      - mongo:mongodb
+  
