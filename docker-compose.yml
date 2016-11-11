@@ -65,18 +65,6 @@ services:
       - VIRTUAL_HOST=wui.muyunsong.com
       - VIRTUAL_PORT=4000
   ##
-  # Static site of Sample
-  ##
-  nginx-slideshow:
-    image: nginx
-    container_name: nginx-sample
-    ports:
-      - 80
-    volumes:
-      - /home/corncandy/Workspace/bit-monkey/dist:/usr/share/nginx/html:ro
-    environment:
-      - VIRTUAL_HOST=sample.muyunsong.com
-  ##
   # Static site of slideshow
   ##
   nginx-slideshow:
