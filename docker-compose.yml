@@ -87,23 +87,23 @@ services:
   ##
   # MongoDB
   ##
-#  mongo:
-#    image: mongo
-#    container_name: mongo
-#    ports:
-#      - 27017
-#    volumes:
-#      - /home/corncandy/Workspace/mongodb:/data/db
-#  mongo-admin:
-#    image: mongo-express
-#    container_name: mongo-admin
-#    links:
-#      - mongo:mongo
-#    ports:
-#      - 8081
-#    environment:
-#      - VIRTUAL_HOST=db.muyunsong.com
-#      - VIRTUAL_PORT=27017
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017
+    volumes:
+      - /home/corncandy/Workspace/mongodb:/data/db
+  mongo-admin:
+    image: mongo-express
+    container_name: mongo-admin
+    links:
+      - mongo:mongo
+    ports:
+      - 8081
+    environment:
+      - VIRTUAL_HOST=db.muyunsong.com
+      - VIRTUAL_PORT=27017
   ##
   # Node Test
   ##
