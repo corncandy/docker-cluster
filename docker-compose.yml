@@ -30,26 +30,26 @@ services:
   ##
   # Jenkins CI
   ##
- data-jenkins:
-   image: busybox
-   container_name: data-jenkins
-   volumes:
-     - /var/jenkins_home
- jenkins-ci:
-   image: jenkins:alpine
-   container_name: jenkins-ci
-   ports:
-     - 8080
-     - 50000
-   user: root
-   volumes:
-     - /etc/timezone:/etc/timezone
-     - /home/corncandy/Workspace/corncandy.github.io:/srv/jekyll
-     - /home/corncandy/Workspace/gitbooks/wd-frontend:/srv/gitbook
-     - /home/corncandy/Workspace/jenkins_home:/var/jenkins_home
-   environment:
-     - VIRTUAL_HOST=ci.muyunsong.com
-     - VIRTUAL_PORT=8080
+  data-jenkins:
+    image: busybox
+    container_name: data-jenkins
+    volumes:
+      - /var/jenkins_home
+  jenkins-ci:
+    image: jenkins:alpine
+    container_name: jenkins-ci
+    ports:
+      - 8080
+      - 50000
+    user: root
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /home/corncandy/Workspace/corncandy.github.io:/srv/jekyll
+      - /home/corncandy/Workspace/gitbooks/wd-frontend:/srv/gitbook
+      - /home/corncandy/Workspace/jenkins_home:/var/jenkins_home
+    environment:
+      - VIRTUAL_HOST=ci.muyunsong.com
+      - VIRTUAL_PORT=8080
   ##
   # GitBook based WUI framework
   ##
